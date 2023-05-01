@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "../Button";
 import Dropdown from "../Dropdown";
 import TextField from "../TextField";
@@ -15,14 +16,48 @@ const Form = () => {
         "Innovation and Management"
     ]
 
+    const [name, setName] = useState("");
+    const [role, setRole] = useState("");
+    const [image, setImage] = useState("");
+    const [team, setTeam] = useState("");
+
+    const onSave = (event) => {
+        event.preventDefault();
+        console.log("Foi submetido", name, role, image, team);
+    }
+
+
     return (
         <section className="form">
-            <form>
+            <form onSubmit={onSave}>
                 <h2>Enter the data to create the collaborator card</h2>
-                <TextField label="Name" placeholder="Enter your name" />
-                <TextField label="Role" placeholder="Enter your role" />
-                <TextField label="Image" placeholder="Enter image file path" />
-                <Dropdown label="Teams" items={teams}/>
+                <TextField 
+                    required={true}
+                    label="Name" 
+                    placeholder="Enter your name"
+                    value={name}
+                    onChange={setName}
+                />
+                <TextField
+                    required = {true}
+                    label="Role"
+                    placeholder="Enter your role" 
+                    value={role}
+                    onChange={setRole}
+                />
+                <TextField
+                    label="Image"
+                    placeholder="Enter image file path"
+                    value={image}
+                    onChange={setImage}
+                />
+                <Dropdown
+                    required={true}
+                    label="Teams" 
+                    items={teams}
+                    value={team}
+                    onChange={setTeam}
+                />
                 <Button>Create Card</Button>
             </form>
         </section>
